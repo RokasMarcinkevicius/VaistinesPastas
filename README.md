@@ -12,7 +12,7 @@ Duomenų bazėje rodo visus sql querių log'us:
 ![image](https://user-images.githubusercontent.com/35724303/168907183-9d2234c3-296d-4102-8cde-0ca50382a619.png)
 
 Užduoties reikalavimai:
-Done - „Importuoti klientus“ - iš duoto JSON failo (klientai.json) reikia į MSSQL duomenų bazę išsaugoti klientų sąrašą (vengti duomenų sudubliavimo).
-Done - „Atnaujinti pašto indeksus“ - iš postit.lt puslapio pagal kliento adresą surasti pašto indeksą ir išsaugoti duomenų bazėje.
-Done - „Klientų sąrašas“ – atidaro langą, kuriame rodome klientų sąrašą (iš duomenų bazės).
-Done - Duomenų bazėje padaryti log lentą, kurioje matytųsi atliktų veiksmų istorija – kada sukurtas kliento įrašas, kada atnaujintas pašto indeksas ir t.t.
+# Done - „Importuoti klientus“ - iš duoto JSON failo (klientai.json) reikia į MSSQL duomenų bazę išsaugoti klientų sąrašą (vengti duomenų sudubliavimo).
+# Done - „Atnaujinti pašto indeksus“ - iš postit.lt puslapio pagal kliento adresą surasti pašto indeksą ir išsaugoti duomenų bazėje.
+# Done - „Klientų sąrašas“ – atidaro langą, kuriame rodome klientų sąrašą (iš duomenų bazės).
+# Done - Duomenų bazėje padaryti log lentą, kurioje matytųsi atliktų veiksmų istorija – kada sukurtas kliento įrašas, kada atnaujintas pašto indeksas ir t.t.
