@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using VaistinesPastas.Repository.Data;
 using VaistinesPastas.Repository.Models;
@@ -18,10 +17,12 @@ namespace VaistinesPastas.Services.Services
     {
         private readonly PastoIndeksaiContext _context;
         private static readonly HttpClient _httpClient = new HttpClient();
+        private IConfiguration _configuration;
 
-        public ClientService(PastoIndeksaiContext context)
+        public ClientService(PastoIndeksaiContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public List<Client> ReturnClientList()
@@ -50,18 +51,17 @@ namespace VaistinesPastas.Services.Services
             foreach (Client client in _context.Set<Client>().ToList())
             {
                 var postITResponse = JsonConvert.DeserializeObject<PostITResponse>(
-                    await _httpClient.GetStringAsync("https://api.postit.lt/?term=" + client.Address + "&key=postit.lt-examplekey"));
+                    await _httpClient.GetStringAsync(_configuration.GetConnectionString("PostITURL") 
+                    + "/?term=" + client.Address + "&key=" + _configuration.GetConnectionString("PostITApiKey")));
+
                 try
                 {
-                    if (postITResponse.data.FirstOrDefault().post_code != null)
-                    {
-                        client.PostCode = postITResponse.data.FirstOrDefault().post_code;
-                    }
+                    client.PostCode = postITResponse.data.FirstOrDefault().post_code;
                 }
-                catch
+                catch (NullReferenceException ex)
                 {
-
                 }
+
                 _context.Clients.Update(client);
             }
             _context.SaveChanges();
